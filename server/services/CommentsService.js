@@ -15,8 +15,16 @@ class CommentsService {
     return data
   }
 
-  async create(rawData) {
-    let data = await dbContext.Comments.create(rawData)
+  async getCommentsByTaskId(id) {
+    let data = await dbContext.Comments.find({ taskId: id })
+    if (!data) {
+      throw new BadRequest("Invalid ID or you do not own this task")
+    }
+    return data;
+  }
+
+  async create(body) {
+    let data = await dbContext.Comments.create(body)
     return data
   }
 
