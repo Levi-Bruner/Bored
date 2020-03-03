@@ -12,7 +12,6 @@ export class ListsController extends BaseController {
     this.router = express.Router()
       .use(auth0provider.getAuthorizedUserInfo)
       .get('/:id', this.getById)
-      //TODO get tasks by list ID
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
