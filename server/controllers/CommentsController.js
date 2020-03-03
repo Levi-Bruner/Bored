@@ -5,7 +5,7 @@ import { commentsService } from '../services/CommentsService'
 
 
 //PUBLIC
-export class CommmentsController extends BaseController {
+export class CommentsController extends BaseController {
   constructor() {
     super("api/comments")
     this.router = express.Router()
