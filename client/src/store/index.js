@@ -18,6 +18,9 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
+    lists: [],
+    tasks: [],
+    comments: [],
     activeBoard: {}
   },
   mutations: {

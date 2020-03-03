@@ -9,14 +9,23 @@
     <div v-for="board in boards" :key="board.id">
       <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link>
     </div>
+    <div class="container-fluid list-row">
+      <div class="row">
+        <BoardComp />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import BoardComp from "@/components/BoardComponent";
 export default {
   name: "boards",
   mounted() {
     this.$store.dispatch("getBoards");
+  },
+  components: {
+    BoardComp
   },
   data() {
     return {
