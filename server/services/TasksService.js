@@ -3,6 +3,7 @@ import { BadRequest } from "../utils/Errors"
 
 
 class TasksService {
+
   async getAll(userEmail) {
     return await dbContext.Tasks.find({ creatorEmail: userEmail }).populate("creator", "name picture")
   }
@@ -13,6 +14,10 @@ class TasksService {
       throw new BadRequest("Invalid ID or you do not own this task")
     }
     return data
+  }
+
+  getTasksByListId(id) {
+
   }
 
   async create(rawData) {
