@@ -4,6 +4,7 @@ import auth0provider from "@bcwdev/auth0provider";
 import { boardService } from '../services/BoardsService';
 import { listService } from '../services/ListsService';
 import { tasksService } from '../services/TasksService';
+import { commentsService } from '../services/CommentsService'
 
 
 //PUBLIC
@@ -17,6 +18,7 @@ export class BoardsController extends BaseController {
       .get('/:id', this.getById)
       .get('/:id/lists', this.getListsByBoardId)
       .get('/:id/lists/:id/tasks', this.getTasksByListId)
+      .get('/:id/lists/:id/tasks/:id/comments', this.getCommentsByTaskId)
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
@@ -49,6 +51,15 @@ export class BoardsController extends BaseController {
   async getTasksByListId(req, res, next) {
     try {
       let data = await tasksService.getTasksByListId(req.params.id)
+      res.send(data)
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getCommentsByTaskId(req, res, next) {
+    try {
+      let data = await commentsService.getCommentsByTaskId(req.params.id)
       res.send(data)
     } catch (error) {
       next(error);
