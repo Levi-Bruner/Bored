@@ -8,7 +8,11 @@
         <button type="submit">Create List</button>
       </form>
     </div>
-    <ListComp v-for="(list) in lists" :key="list.id" :listData="list" />
+    <div class="container-fluid">
+      <div class="row list-row">
+        <ListComp v-for="(list) in lists" :key="list.id" :listData="list" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -29,7 +33,6 @@ export default {
   },
   methods: {
     addList() {
-      debugger;
       this.newList = {
         boardId: this.$route.params.boardId,
         creatorEmail: this.user.email,
