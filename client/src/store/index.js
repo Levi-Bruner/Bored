@@ -29,6 +29,12 @@ export default new Vuex.Store({
     },
     setBoards(state, boards) {
       state.boards = boards
+    },
+    setActiveBoard(state, board) {
+      state.activeBoard = board;
+    },
+    setLists(state, lists) {
+      state.lists = lists;
     }
   },
   actions: {
@@ -62,12 +68,22 @@ export default new Vuex.Store({
         .then(serverBoard => {
           dispatch('getBoards')
         })
-    }
+    },
+    setActiveBoard({ commit, dispatch }, board) {
+      commit("setActiveBoard", board)
+    },
     //#endregion
 
 
     //#region -- LISTS --
-
+    async getListsByBoardId({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.get("Boards/" + boardId + "/lists");
+        commit("setLists", res.data)
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
 
     //#endregion
