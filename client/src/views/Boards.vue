@@ -6,12 +6,14 @@
       <input type="text" placeholder="description" v-model="newBoard.description" />
       <button type="submit">Create Board</button>
     </form>
-    <div v-for="board in boards" :key="board.id">
-      <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link>
-    </div>
     <div class="container-fluid list-row">
       <div class="row">
-        <BoardComp />
+        <BoardComp
+          v-for="(boardObj, index) in boards"
+          :key="boardObj.id"
+          :boardData="boardObj"
+          :boardIndex="index"
+        />
       </div>
     </div>
   </div>
@@ -44,6 +46,9 @@ export default {
     addBoard() {
       this.$store.dispatch("addBoard", this.newBoard);
       this.newBoard = { title: "", description: "" };
+    },
+    setActiveBoard() {
+      this.$store.dispatch("setActiveBoard", this.$route.params.boardId);
     }
   }
 };

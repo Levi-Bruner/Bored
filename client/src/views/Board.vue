@@ -6,12 +6,21 @@
 </template>
 
 <script>
+import ListComp from "../components/ListComponent";
 export default {
   name: "board",
+  mounted() {
+    return this.$store.dispatch(
+      "getListsByBoardId",
+      this.$route.params.boardId
+    );
+  },
   computed: {
     board() {
-      //FIXME This does not work on page reload because the activeBoard is empty in the store
       return this.$store.state.activeBoard;
+    },
+    lists() {
+      this.$store.dispatch("getListsByBoardId", this.$route.params.boardId);
     }
   },
   props: ["boardId"]
