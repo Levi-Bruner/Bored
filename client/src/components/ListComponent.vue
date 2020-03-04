@@ -1,8 +1,11 @@
-<template></template>
+<template>
+  <h3>{{listData.title}}</h3>
+</template>
 
 <script>
 export default {
-  name: "ListComp"
+  name: "ListComp",
+  props: ["listData"]
 };
 </script>
 

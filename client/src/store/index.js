@@ -83,6 +83,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    async addList({ commit, dispatch }, newList) {
+      try {
+        let res = api.post('lists', newList)
+      } catch (error) {
+        console.error(error);
+      }
+
     }
 
 
