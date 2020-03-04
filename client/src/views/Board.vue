@@ -36,9 +36,13 @@ export default {
       this.newList = {
         boardId: this.$route.params.boardId,
         creatorEmail: this.user.email,
-        title: this.newList
+        title: this.newList.title
       };
       this.$store.dispatch("addList", this.newList);
+      return this.$store.dispatch(
+        "getListsByBoardId",
+        this.$route.params.boardId
+      );
     }
   },
   computed: {
