@@ -20,7 +20,6 @@ export default {
       this.$store.dispatch("setActiveBoard", this.boardData);
     },
     deleteBoard() {
-      debugger;
       this.$store.dispatch("deleteBoard", this.boardData.id);
     }
   },
