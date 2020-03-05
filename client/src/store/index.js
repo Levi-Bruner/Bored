@@ -38,6 +38,16 @@ export default new Vuex.Store({
     },
     setTasks(state, payload) {
       Vue.set(state.tasks, payload.listId, payload.tasks)
+    },
+    //setComments here
+    deleteBoard(state, id) {
+      state.boards = state.boards.filter(b => b.id != id)
+    },
+    deleteList(state, id) {
+      state.lists = state.lists.filter(l => l.id != id)
+    },
+    deleteTask(state, id) {
+      state.tasks = state.tasks.find(t => t.id != id)
     }
   },
   actions: {
@@ -75,6 +85,14 @@ export default new Vuex.Store({
     setActiveBoard({ commit, dispatch }, board) {
       commit("setActiveBoard", board)
     },
+    async deleteBoard({ commit, dispatch }, boardId) {
+      try {
+        let res = await api.delete("/boards/" + boardId);
+        commit("deleteBoard", boardId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     //#endregion
 
 
@@ -97,10 +115,33 @@ export default new Vuex.Store({
     },
     async addList({ commit, dispatch }, newList) {
       try {
-        let res = api.post('lists', newList)
+        let res = await api.post('lists', newList)
         // commit("setLists", newList.title)
       } catch (error) {
         console.error(error);
+      }
+    },
+    async addTask({ commit, dispatch }, newTask) {
+      try {
+        let res = await api.post('tasks', newTask)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteList({ commit, dispatch }, listId) {
+      try {
+        let res = await api.delete("lists/" + listId)
+        commit("deleteList", listId)
+      } catch (error) {
+        console.error(error)
+      }
+    },
+    async deleteTask({ commit, dispatch }, taskId) {
+      try {
+        let res = await api.delete("tasks/" + taskId)
+        commit("deleteTask", taskId)
+      } catch (error) {
+        console.error(error)
       }
     }
 
