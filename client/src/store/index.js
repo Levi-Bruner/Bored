@@ -19,7 +19,7 @@ export default new Vuex.Store({
     user: {},
     boards: [],
     lists: [],
-    tasks: [],
+    tasks: {},
     comments: [],
     activeBoard: {}
   },
@@ -35,6 +35,9 @@ export default new Vuex.Store({
     },
     setLists(state, lists) {
       state.lists = lists;
+    },
+    setTasks(state, payload) {
+      Vue.set(state.tasks, payload.listId, payload.tasks)
     }
   },
   actions: {
@@ -84,6 +87,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async getTasksByListId({ commit, dispatch }, listData) {
+      try {
+        let res = await api.get("boards/" + listData.boardId + "/lists/" + listData.id + "/tasks");
+        commit("setTasks", { tasks: res.data, listId: listData.id })
+      } catch (error) {
+        console.error(error);
+      }
+    },
     async addList({ commit, dispatch }, newList) {
       try {
         let res = api.post('lists', newList)
@@ -91,7 +102,6 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
-
     }
 
 

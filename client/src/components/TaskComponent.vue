@@ -1,10 +1,11 @@
 <template>
-  <h5>Task here</h5>
+  <h5>{{taskData.title}}</h5>
 </template>
 
 <script>
 export default {
-  name: "TaskComp"
+  name: "TaskComp",
+  props: ["taskData"]
 };
 </script>
 
