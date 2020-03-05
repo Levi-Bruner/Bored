@@ -1,12 +1,14 @@
 <template>
   <div class="col-4 list">
-    <button @click="deleteList">X</button>
-    <h3>{{listData.title}}</h3>
+    <h3>
+      {{listData.title}}
+      <button @click="deleteList">X</button>
+    </h3>
     <form @submit.prevent="addTask">
       <input type="text" placeholder="task..." v-model="title" required />
       <button type="submit">Create Task</button>
     </form>
-    <TaskComp v-for="(task) in tasks" :key="task.id" :taskData="task" />
+    <TaskComp v-for="task in tasks" :key="task.id" :taskData="task" />
   </div>
 </template>
 
