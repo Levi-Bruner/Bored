@@ -51,6 +51,9 @@ export default new Vuex.Store({
     //FIXME  
     deleteTask(state, id) {
       state.tasks = state.tasks.delete([id])
+    },
+    deleteComment(state, id) {
+      state.comments = state.comments.delete([id])
     }
   },
   actions: {
@@ -139,6 +142,14 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async addComment({ commit, dispatch }, newComment) {
+      debugger
+      try {
+        let res = await api.post('comments', newComment)
+      } catch (error) {
+        console.error(error)
+      }
+    },
     async deleteList({ commit, dispatch }, listId) {
       try {
         let res = await api.delete("lists/" + listId)
@@ -154,7 +165,15 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error)
       }
-    }
+    },
+    async deleteComment({ commit, dispatch }, commentId) {
+      try {
+        let res = await api.delete("comments/" + commentId)
+        commit("deleteComment", commentId)
+      } catch (error) {
+
+      }
+    },
 
 
     //#endregion
