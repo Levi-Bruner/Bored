@@ -20,7 +20,7 @@ export default new Vuex.Store({
     boards: [],
     lists: [],
     tasks: {},
-    comments: [],
+    comments: {},
     activeBoard: {}
   },
   mutations: {
@@ -39,15 +39,18 @@ export default new Vuex.Store({
     setTasks(state, payload) {
       Vue.set(state.tasks, payload.listId, payload.tasks)
     },
-    //setComments here
+    setComments(state, payload) {
+      Vue.set(state.comments, payload.taskId, payload.comments)
+    },
     deleteBoard(state, id) {
       state.boards = state.boards.filter(b => b.id != id)
     },
     deleteList(state, id) {
       state.lists = state.lists.filter(l => l.id != id)
     },
+    //FIXME  
     deleteTask(state, id) {
-      state.tasks = state.tasks.find(t => t.id != id)
+      state.tasks = state.tasks.delete([id])
     }
   },
   actions: {
@@ -111,6 +114,14 @@ export default new Vuex.Store({
         commit("setTasks", { tasks: res.data, listId: listData.id })
       } catch (error) {
         console.error(error);
+      }
+    },
+    async getCommentsByTaskId({ commit, dispatch }, taskData) {
+      try {
+        let res = await api.get("boards/" + taskData.boardId + "/lists/" + taskData.listId + "/tasks/" + taskData.id + "/comments")
+        commit("setComments", { comments: res.data, taskId: taskData.id })
+      } catch (error) {
+        console.error(error)
       }
     },
     async addList({ commit, dispatch }, newList) {
