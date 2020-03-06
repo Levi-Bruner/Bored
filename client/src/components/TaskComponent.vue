@@ -4,6 +4,19 @@
       {{taskData.title}}
       <button @click="deleteTask">x</button>
     </h5>
+    <div class="dropdown">
+      <button
+        class="btn btn-secondary dropdown-toggle"
+        type="button"
+        id="dropdownMenuButton"
+        data-toggle="dropdown"
+      >More</button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
     <form @submit.prevent="addComment">
       <input type="text" placeholder="comment..." v-model="content" required />
       <button type="submit">Submit</button>

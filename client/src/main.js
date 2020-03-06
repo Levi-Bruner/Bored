@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import { Auth0Plugin } from "@bcwdev/auth0-vue";
 import { domain, clientId, audience } from "./authConfig";
 
@@ -17,6 +18,8 @@ Vue.use(Auth0Plugin, {
     );
   }
 });
+
+
 
 new Vue({
   router,
