@@ -11,6 +11,20 @@
       </form>
       <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
     </fieldset>
+  <div>
+    <h5>
+      {{taskData.title}}
+      <button @click="deleteTask">x</button>
+    </h5>
+    <select v-model="newId">
+      <option v-for="list in lists" :key="list.id" :value="list.id">{{list.title}}</option>
+    </select>
+    <button @click="moveList">Move</button>
+    <form @submit.prevent="addComment">
+      <input type="text" placeholder="comment..." v-model="content" required />
+      <button type="submit">Submit</button>
+    </form>
+    <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
   </div>
 </template>
 
@@ -23,7 +37,8 @@ export default {
   },
   data() {
     return {
-      content: ""
+      content: "",
+      newId: ""
     };
   },
   props: ["taskData"],
@@ -41,11 +56,18 @@ export default {
       this.content = "";
     },
     deleteTask() {
-      //this.$store.dispatch("deleteTask", this.taskData.id);
-      //debugger;
       this.$store.dispatch("deleteTask", this.taskData);
+    },
+    moveList() {
+      let newList = {
+        boardId: this.taskData.boardId,
+        oldListId: this.taskData.listId,
+        listId: this.newId,
+        id: this.taskData.id
+      };
+      this.$store.dispatch("moveList", newList);
     }
-  },
+   },
   components: {
     CommentComp
   },
@@ -55,6 +77,9 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+    lists() {
+      return this.$store.state.lists;
     }
   }
 };
