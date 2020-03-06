@@ -1,14 +1,18 @@
 <template>
-  <div class="col-4 list">
+  <div class = "row list-style">
+  <div class="col-12 col-md-12">
+  <fieldset class = "fieldset-list">
     <h3>
       {{listData.title}}
-      <button @click="deleteList">X</button>
+      <button class = "btn-delete-list" @click="deleteList">DELETE LIST</button>
     </h3>
     <form @submit.prevent="addTask">
       <input type="text" placeholder="task..." v-model="title" required />
       <button type="submit">Create Task</button>
     </form>
     <TaskComp v-for="task in tasks" :key="task.id" :taskData="task" />
+  </fieldset>
+  </div>
   </div>
 </template>
 
@@ -56,4 +60,26 @@ export default {
 </script>
 
 <style scoped>
+
+.btn-delete-list
+{
+  background-color:darkred;
+  color:silver;
+  font-size:1rem;
+}
+
+.btn-delete-list:hover
+{
+  background-color:red;
+}
+
+.list-style
+{
+  background-color:seagreen;
+}
+
+.fieldset-list
+{
+  border:solid 2px black;
+}
 </style>

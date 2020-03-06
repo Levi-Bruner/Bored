@@ -1,14 +1,16 @@
 <template>
-  <div>
-    <h5>
-      {{taskData.title}}
-      <button @click="deleteTask">x</button>
-    </h5>
-    <form @submit.prevent="addComment">
-      <input type="text" placeholder="comment..." v-model="content" required />
-      <button type="submit">Submit</button>
-    </form>
-    <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
+  <div class="task-style">
+    <fieldset class="fieldset-task">
+      <h5>
+        {{taskData.title}}
+        <button class="btn-delete-task" @click="deleteTask">DELETE TASK</button>
+      </h5>
+      <form @submit.prevent="addComment">
+        <input type="text" placeholder="comment..." v-model="content" required />
+        <button type="submit">Submit</button>
+      </form>
+      <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
+    </fieldset>
   </div>
 </template>
 
@@ -37,10 +39,8 @@ export default {
 
       this.$store.dispatch("addComment", newComment);
       this.content = "";
-      
     },
     deleteTask() {
-
       //this.$store.dispatch("deleteTask", this.taskData.id);
       //debugger;
       this.$store.dispatch("deleteTask", this.taskData);
@@ -61,4 +61,20 @@ export default {
 </script>
 
 <style scoped>
+.btn-delete-task {
+  background-color: darkred;
+  color: silver;
+  font-size: 0.8rem;
+}
+
+.btn-delete-task:hover {
+  background-color: red;
+}
+
+.task-style {
+  background-color: lightskyblue;
+}
+.fieldset-task {
+  border: solid 2px black;
+}
 </style>

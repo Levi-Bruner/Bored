@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class = "boardcomp-style">
+    <div class="row">
+      <div class = "col-12 col-md-12">
+    <fieldset class = "fieldset-board">
     <router-link :to="{name: 'board', params: {boardId: this.boardData.id}}">
       <div @click="setActive" class="card m-auto" style="width: 18rem;">
         <div class="card-body text-center">
@@ -8,7 +11,10 @@
         </div>
       </div>
     </router-link>
-    <button @click="deleteBoard">X</button>
+    <button class = "btn-delete-board" @click="deleteBoard">DELETE BOARD</button>
+    </fieldset>
+    </div>
+    </div>
   </div>
 </template>
 
@@ -33,4 +39,24 @@ export default {
 </script>
 
 <style scoped>
+
+.boardcomp-style
+{
+  background-color:gold;
+
+}
+
+.btn-delete-board
+{
+  background-color:darkred;
+  color:silver;
+}
+.btn-delete-board:hover
+{
+  background-color:red;
+}
+.fieldset-board
+{
+  border:solid 2px black;
+}
 </style>
