@@ -174,7 +174,24 @@ export default new Vuex.Store({
 
       }
     },
-
+    async moveList({ commit, dispatch }, payload) {
+      debugger
+      try {
+        let dataOne = {
+          boardId: payload.boardId,
+          id: payload.listId
+        }
+        let dataTwo = {
+          boardId: payload.boardId,
+          id: payload.oldListId
+        }
+        let res = await api.put('tasks/' + payload.id, payload)
+        dispatch("getTasksByListId", dataOne)
+        dispatch("getTasksByListId", dataTwo)
+      } catch (error) {
+        console.error(error)
+      }
+    }
 
     //#endregion
   }

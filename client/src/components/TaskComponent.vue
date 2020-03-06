@@ -4,19 +4,27 @@
       {{taskData.title}}
       <button @click="deleteTask">x</button>
     </h5>
-    <div class="dropdown">
+    <!-- <div class="dropdown">
       <button
         class="btn btn-secondary dropdown-toggle"
         type="button"
         id="dropdownMenuButton"
         data-toggle="dropdown"
-      >More</button>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="#">Action</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+      >Move Task</button>
+      <div class="dropdown-menu">
+        <a
+          @click="moveList"
+          v-for="list in lists"
+          :key="list.id"
+          :value="list.id"
+          class="dropdown-item"
+        >{{list.title}}</a>
       </div>
-    </div>
+    </div>-->
+    <select v-model="newId">
+      <option v-for="list in lists" :key="list.id" :value="list.id">{{list.title}}</option>
+    </select>
+    <button @click="moveList">Move</button>
     <form @submit.prevent="addComment">
       <input type="text" placeholder="comment..." v-model="content" required />
       <button type="submit">Submit</button>
@@ -34,7 +42,8 @@ export default {
   },
   data() {
     return {
-      content: ""
+      content: "",
+      newId: ""
     };
   },
   props: ["taskData"],
@@ -53,6 +62,16 @@ export default {
     },
     deleteTask() {
       this.$store.dispatch("deleteTask", this.taskData.id);
+    },
+    moveList() {
+      debugger;
+      let newList = {
+        boardId: this.taskData.boardId,
+        oldListId: this.taskData.listId,
+        listId: this.newId,
+        id: this.taskData.id
+      };
+      this.$store.dispatch("moveList", newList);
     }
   },
   components: {
@@ -64,6 +83,9 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+    lists() {
+      return this.$store.state.lists;
     }
   }
 };
