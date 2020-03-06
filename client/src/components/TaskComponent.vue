@@ -5,28 +5,19 @@
         {{taskData.title}}
         <button class="btn-delete-task" @click="deleteTask">DELETE TASK</button>
       </h5>
+      <select v-model="newId">
+        <option v-for="list in lists" :key="list.id" :value="list.id">{{list.title}}</option>
+      </select>
+      <button @click="moveList">Move</button>
       <form @submit.prevent="addComment">
         <input type="text" placeholder="comment..." v-model="content" required />
         <button type="submit">Submit</button>
       </form>
       <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
     </fieldset>
-  <div>
-    <h5>
-      {{taskData.title}}
-      <button @click="deleteTask">x</button>
-    </h5>
-    <select v-model="newId">
-      <option v-for="list in lists" :key="list.id" :value="list.id">{{list.title}}</option>
-    </select>
-    <button @click="moveList">Move</button>
-    <form @submit.prevent="addComment">
-      <input type="text" placeholder="comment..." v-model="content" required />
-      <button type="submit">Submit</button>
-    </form>
-    <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
   </div>
 </template>
+
 
 <script>
 import CommentComp from "./CommentComponent";
@@ -67,7 +58,7 @@ export default {
       };
       this.$store.dispatch("moveList", newList);
     }
-   },
+  },
   components: {
     CommentComp
   },
