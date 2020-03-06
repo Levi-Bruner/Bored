@@ -64,7 +64,6 @@ export default {
       this.$store.dispatch("deleteTask", this.taskData.id);
     },
     moveList() {
-      debugger;
       let newList = {
         boardId: this.taskData.boardId,
         oldListId: this.taskData.listId,

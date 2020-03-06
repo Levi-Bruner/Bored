@@ -175,7 +175,6 @@ export default new Vuex.Store({
       }
     },
     async moveList({ commit, dispatch }, payload) {
-      debugger
       try {
         let dataOne = {
           boardId: payload.boardId,
