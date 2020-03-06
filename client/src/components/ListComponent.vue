@@ -45,7 +45,8 @@ export default {
         boardId: this.listData.boardId
       };
       this.$store.dispatch("addTask", newTask);
-      return this.$store.dispatch("getTasksByListId", this.listData);
+      this.title = "";
+      //this.$store.dispatch("getTasksByListId", this.listData);
     },
     deleteList() {
       this.$store.dispatch("deleteList", this.listData.id);
