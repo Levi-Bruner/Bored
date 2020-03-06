@@ -10,9 +10,14 @@ export default {
   name: "CommentComp",
   props: ["commentData"],
   methods: {
-    deleteComment() {
-      this.$store.dispatch("deleteComment", this.commentData.id);
+
+     deleteComment() {
+
+      //this.$store.dispatch("deleteTask", this.taskData.id);
+      //debugger;
+      this.$store.dispatch("deleteComment", this.commentData);
     }
+    
   }
 };
 </script>

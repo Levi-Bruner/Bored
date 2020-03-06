@@ -48,12 +48,18 @@ export default new Vuex.Store({
     deleteList(state, id) {
       state.lists = state.lists.filter(l => l.id != id)
     },
-    //FIXME  
-    deleteTask(state, id) {
-      state.tasks = state.tasks.delete([id])
+    //fixed! 
+    deleteTask(state, taskData) {
+      //state.tasks = state.tasks.delete(id)
+      //debugger;
+      state.tasks[taskData.listId] = state.tasks[taskData.listId].filter(t => t.id != taskData.id)
+     
     },
-    deleteComment(state, id) {
-      state.comments = state.comments.delete([id])
+    deleteComment(state, commentData) {
+  
+      state.comments[commentData.taskId] = 
+        state.comments[commentData.taskId].filter(c =>c.id != commentData.id)
+
     }
   },
   actions: {
@@ -138,14 +144,20 @@ export default new Vuex.Store({
     async addTask({ commit, dispatch }, newTask) {
       try {
         let res = await api.post('tasks', newTask)
+        if (res) {
+          dispatch("getTasksByListId", { boardId: newTask.boardId, id: newTask.listId })
+        }
       } catch (error) {
         console.error(error);
       }
     },
     async addComment({ commit, dispatch }, newComment) {
-      debugger
+
       try {
         let res = await api.post('comments', newComment)
+        if (res) {
+          dispatch("getCommentsByTaskId", { boardId: newComment.boardId, listId: newComment.listId, id: newComment.taskId })
+        }
       } catch (error) {
         console.error(error)
       }
@@ -154,22 +166,25 @@ export default new Vuex.Store({
       try {
         let res = await api.delete("lists/" + listId)
         commit("deleteList", listId)
+        //dispatch("getTasksByListId", { boardId: newComment.boardId, })
       } catch (error) {
         console.error(error)
       }
     },
-    async deleteTask({ commit, dispatch }, taskId) {
+    async deleteTask({ commit, dispatch }, taskData) {
       try {
-        let res = await api.delete("tasks/" + taskId)
-        commit("deleteTask", taskId)
+        let res = await api.delete("tasks/" + taskData.id)
+        commit("deleteTask", taskData) //had taskData.id
+        //added below
+        //dispatch("getTasksByListId", { listId: taskData.listId })
       } catch (error) {
         console.error(error)
       }
     },
-    async deleteComment({ commit, dispatch }, commentId) {
+    async deleteComment({ commit, dispatch }, commentData) {
       try {
-        let res = await api.delete("comments/" + commentId)
-        commit("deleteComment", commentId)
+        let res = await api.delete("comments/" + commentData.id)
+        commit("deleteComment", commentData)
       } catch (error) {
 
       }

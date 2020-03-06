@@ -34,12 +34,16 @@ export default {
         listId: this.taskData.id,
         boardId: this.taskData.boardId
       };
+
       this.$store.dispatch("addComment", newComment);
       this.content = "";
-      return this.$store.dispatch("getCommentsByTaskId", this.taskData);
+      
     },
     deleteTask() {
-      this.$store.dispatch("deleteTask", this.taskData.id);
+
+      //this.$store.dispatch("deleteTask", this.taskData.id);
+      //debugger;
+      this.$store.dispatch("deleteTask", this.taskData);
     }
   },
   components: {
