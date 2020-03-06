@@ -1,7 +1,13 @@
 <template>
   <div>
+    <div class = "rows">
+      <div class = "col-12 col-md-12">
+      <fieldset class = "fieldset-comment comment-style">
     {{commentData.content}}
-    <button @click="deleteComment">x</button>
+    <button class = "btn-delete-comment" @click="deleteComment">DELETE COMMENT</button>
+    </fieldset >
+    </div>
+    </div>
   </div>
 </template>
 
@@ -23,4 +29,27 @@ export default {
 </script>
 
 <style scoped>
+
+.btn-delete-comment
+{
+  background-color:darkred;
+  color:silver;
+  font-size:.5rem;
+}
+
+.btn-delete-comment:hover
+{
+  color:red;
+}
+
+.commment-style
+{
+  
+}
+
+.fieldset-comment
+{
+  border:solid 2px black;
+  background-color:gray;
+}
 </style>

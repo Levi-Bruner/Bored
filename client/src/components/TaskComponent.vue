@@ -1,26 +1,21 @@
 <template>
+  <div class="task-style">
+    <fieldset class="fieldset-task">
+      <h5>
+        {{taskData.title}}
+        <button class="btn-delete-task" @click="deleteTask">DELETE TASK</button>
+      </h5>
+      <form @submit.prevent="addComment">
+        <input type="text" placeholder="comment..." v-model="content" required />
+        <button type="submit">Submit</button>
+      </form>
+      <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
+    </fieldset>
   <div>
     <h5>
       {{taskData.title}}
       <button @click="deleteTask">x</button>
     </h5>
-    <!-- <div class="dropdown">
-      <button
-        class="btn btn-secondary dropdown-toggle"
-        type="button"
-        id="dropdownMenuButton"
-        data-toggle="dropdown"
-      >Move Task</button>
-      <div class="dropdown-menu">
-        <a
-          @click="moveList"
-          v-for="list in lists"
-          :key="list.id"
-          :value="list.id"
-          class="dropdown-item"
-        >{{list.title}}</a>
-      </div>
-    </div>-->
     <select v-model="newId">
       <option v-for="list in lists" :key="list.id" :value="list.id">{{list.title}}</option>
     </select>
@@ -59,10 +54,9 @@ export default {
 
       this.$store.dispatch("addComment", newComment);
       this.content = "";
-      return this.$store.dispatch("getCommentsByTaskId", this.taskData);
     },
     deleteTask() {
-    this.$store.dispatch("deleteTask", this.taskData.id);
+      this.$store.dispatch("deleteTask", this.taskData);
     },
     moveList() {
       let newList = {
@@ -92,4 +86,20 @@ export default {
 </script>
 
 <style scoped>
+.btn-delete-task {
+  background-color: darkred;
+  color: silver;
+  font-size: 0.8rem;
+}
+
+.btn-delete-task:hover {
+  background-color: red;
+}
+
+.task-style {
+  background-color: lightskyblue;
+}
+.fieldset-task {
+  border: solid 2px black;
+}
 </style>
