@@ -51,7 +51,9 @@ export default {
       console.log(this.$auth.user);
     },
     async logout() {
-      await this.$auth.logout();
+      await this.$auth.logout({
+        returnTo: "/"
+      });
       this.$store.dispatch("resetBearer");
       this.$router.push({ name: "home" });
     }
