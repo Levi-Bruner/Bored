@@ -1,20 +1,15 @@
 <template>
-  <div class = "boardcomp-style">
-    <div class="row">
-      <div class = "col-12 col-md-12">
-    <fieldset class = "fieldset-board">
+  <div class="boardcomp-style col-12 col-md-3">
     <router-link :to="{name: 'board', params: {boardId: this.boardData.id}}">
-      <div @click="setActive" class="card m-auto" style="width: 18rem;">
-        <div class="card-body text-center">
-          <h3>{{boardData.title}}</h3>
-          <h5>{{boardData.description}}</h5>
+      <div @click="setActive" class="card">
+        <img class="card-img-top" src="https://picsum.photos/200" alt />
+        <div class="card-body">
+          <h4 class="card-title">{{boardData.title}}</h4>
+          <p class="card-text">{{boardData.description}}</p>
         </div>
       </div>
     </router-link>
-    <button class = "btn-delete-board" @click="deleteBoard">DELETE BOARD</button>
-    </fieldset>
-    </div>
-    </div>
+    <button class="btn-delete-board btn-danger" @click="deleteBoard">X</button>
   </div>
 </template>
 
@@ -39,24 +34,14 @@ export default {
 </script>
 
 <style scoped>
-
-.boardcomp-style
-{
-  background-color:gold;
-
+.card-body {
+  color: black;
 }
 
-.btn-delete-board
-{
-  background-color:darkred;
-  color:silver;
+.btn-delete-board {
+  border-radius: 25%;
 }
-.btn-delete-board:hover
-{
-  background-color:red;
-}
-.fieldset-board
-{
-  border:solid 2px black;
+.btn-delete-board:hover {
+  background-color: rgb(184, 39, 39);
 }
 </style>

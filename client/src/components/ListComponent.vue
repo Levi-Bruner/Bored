@@ -1,18 +1,14 @@
 <template>
-  <div class = "row list-style">
-  <div class="col-12 col-md-12">
-  <fieldset class = "fieldset-list">
-    <h3>
+  <div class="col-12 col-md-4 list-style">
+    <h2>
       {{listData.title}}
-      <button class = "btn-delete-list" @click="deleteList">DELETE LIST</button>
-    </h3>
+      <button class="btn-delete-list" @click="deleteList">X</button>
+    </h2>
     <form @submit.prevent="addTask">
       <input type="text" placeholder="task..." v-model="title" required />
       <button type="submit">Create Task</button>
     </form>
     <TaskComp v-for="task in tasks" :key="task.id" :taskData="task" />
-  </fieldset>
-  </div>
   </div>
 </template>
 
@@ -50,7 +46,6 @@ export default {
       };
       this.$store.dispatch("addTask", newTask);
       this.title = "";
-      //this.$store.dispatch("getTasksByListId", this.listData);
     },
     deleteList() {
       this.$store.dispatch("deleteList", this.listData.id);
@@ -60,26 +55,21 @@ export default {
 </script>
 
 <style scoped>
-
-.btn-delete-list
-{
-  background-color:darkred;
-  color:silver;
-  font-size:1rem;
+.btn-delete-list {
+  background-color: darkred;
+  color: silver;
+  font-size: 1rem;
 }
 
-.btn-delete-list:hover
-{
-  background-color:red;
+.btn-delete-list:hover {
+  background-color: red;
 }
 
-.list-style
-{
-  background-color:seagreen;
-}
-
-.fieldset-list
-{
-  border:solid 2px black;
+.list-style {
+  padding-top: 5px;
+  margin-bottom: 3px;
+  border: solid 2px black;
+  border-radius: 8px;
+  background-color: darkgray;
 }
 </style>
