@@ -9,7 +9,6 @@
         <button type="submit">Create List</button>
       </form>
       <div class="row p-2"></div>
-      <hr />
     </div>
     <div class="container-fluid">
       <div class="row list-row">
