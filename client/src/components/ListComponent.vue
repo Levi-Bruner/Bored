@@ -6,7 +6,7 @@
     </h2>
     <form @submit.prevent="addTask">
       <input type="text" placeholder="task..." v-model="title" required />
-      <button type="submit">Create Task</button>
+      <button class="btn btn-secondary" type="submit">Create Task</button>
     </form>
     <TaskComp v-for="task in tasks" :key="task.id" :taskData="task" />
   </div>

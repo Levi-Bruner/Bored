@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <h1>Welcome to Bored!</h1>
+    <h1 class="intro">Welcome to Bored!</h1>
     <h4>Please sign in to continue...</h4>
   </div>
 </template>
@@ -21,8 +21,11 @@ export default {
 
 <style scoped>
 .home {
-  background-image: url(https://therightsofnature.org/wp-content/uploads/2018/01/turkey-3048299_1920.jpg);
+  background-color: darkslategray;
   height: 100vh;
   width: auto;
+}
+.intro {
+  padding-top: 10vh;
 }
 </style>
