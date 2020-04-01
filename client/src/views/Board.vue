@@ -6,7 +6,7 @@
       <div class="row p-2"></div>
       <form @submit.prevent="addList">
         <input type="text" placeholder="title" v-model="newList.title" required />
-        <button type="submit">Create List</button>
+        <button class="btn btn-secondary" type="submit">Create List</button>
       </form>
       <div class="row p-2"></div>
     </div>
@@ -35,16 +35,13 @@ export default {
   },
   methods: {
     addList() {
+      debugger;
       this.newList = {
         boardId: this.$route.params.boardId,
         creatorEmail: this.user.email,
         title: this.newList.title
       };
       this.$store.dispatch("addList", this.newList);
-      return this.$store.dispatch(
-        "getListsByBoardId",
-        this.$route.params.boardId
-      );
     }
   },
   computed: {

@@ -7,10 +7,10 @@
     <select v-model="newId">
       <option v-for="list in lists" :key="list.id" :value="list.id">{{list.title}}</option>
     </select>
-    <button @click="moveList">Move</button>
+    <button class="btn btn-secondary" @click="moveList">Move</button>
     <form @submit.prevent="addComment">
       <input type="text" placeholder="comment..." v-model="content" required />
-      <button type="submit">Submit</button>
+      <button class="btn btn-secondary" type="submit">Submit</button>
     </form>
     <CommentComp v-for="comment in comments" :key="comment.id" :commentData="comment" />
   </div>
@@ -87,6 +87,7 @@ export default {
 
 .task-style {
   background-color: lightskyblue;
+  border-radius: 8px;
   margin-bottom: 5px;
 }
 </style>

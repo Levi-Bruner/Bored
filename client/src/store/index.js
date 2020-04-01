@@ -53,12 +53,12 @@ export default new Vuex.Store({
       //state.tasks = state.tasks.delete(id)
       //debugger;
       state.tasks[taskData.listId] = state.tasks[taskData.listId].filter(t => t.id != taskData.id)
-     
+
     },
     deleteComment(state, commentData) {
-  
-      state.comments[commentData.taskId] = 
-        state.comments[commentData.taskId].filter(c =>c.id != commentData.id)
+
+      state.comments[commentData.taskId] =
+        state.comments[commentData.taskId].filter(c => c.id != commentData.id)
 
     }
   },
@@ -136,7 +136,7 @@ export default new Vuex.Store({
     async addList({ commit, dispatch }, newList) {
       try {
         let res = await api.post('lists', newList)
-        // commit("setLists", newList.title)
+        dispatch("getListsByBoardId", newList.boardId)
       } catch (error) {
         console.error(error);
       }
