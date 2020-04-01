@@ -1,6 +1,6 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link class="navbar-brand" :to="{ name: 'home' }">Kanban</router-link>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <router-link class="navbar-brand" :to="{ name: 'home' }">Home</router-link>
     <button
       class="navbar-toggler"
       type="button"
@@ -14,9 +14,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item" :class="{ active: $route.name == 'home' }">
-          <router-link :to="{ name: 'home' }" class="nav-link">Home</router-link>
-        </li>
         <li
           class="nav-item"
           v-if="$auth.isAuthenticated"
